@@ -9,7 +9,7 @@ from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
 wCam, hcam = 640, 480
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 cap.set(3, wCam)
 cap.set(4, hcam)
 pTime = 0
@@ -25,6 +25,7 @@ maxVol = volRange[1]
 vol = 0
 volBar = 400
 volPer = 0
+colorVol = (255, 0, 0)
 while True:
     success, img = cap.read()
     img = detector.findHands(img)
@@ -53,7 +54,7 @@ while True:
     
     cVol = int(volume.GetMasterVolumeLevelScalar() * 100)
     cv2.putText(img, f'Vol Set: {int(cVol)}', (400, 50), cv2.FONT_HERSHEY_COMPLEX, 1, colorVol, 3)
-    
+
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
